@@ -1,17 +1,17 @@
 FROM golang:1.16-alpine
 
+RUN mkdir /app
+
+ADD . /app
+
 WORKDIR /app
 
-COPY go.mod ./
-
-COPY go.sum ./
-
-RUN go mod download
+RUN go mod tidy
 
 COPY *.go ./
 
-RUN go build -o go-restful
+RUN go build go-restful
 
 EXPOSE 8080
 
-CMD [ "go-restful" ]
+CMD [ "/app/go-restful" ]
