@@ -10,8 +10,8 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /go-restful
+RUN go build -o go-restful
 
 EXPOSE 8080
 
-CMD [ "/go-restful" ]
+CMD [ "go-restful" ]
