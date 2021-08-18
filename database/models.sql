@@ -1,4 +1,4 @@
-CREATE ROLE gouser WITH LOGIN PASSWORD 'gouser';
+--- CREATE ROLE gouser WITH LOGIN PASSWORD 'gouser';
 
 DO $$
 BEGIN
