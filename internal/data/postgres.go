@@ -4,21 +4,32 @@ import (
 	"database/sql"
 	"io/ioutil"
 	"log"
-	"os"
 
 	// registering database driver
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
+var (
+	envs map[string]string
+	err  error
+)
+
 func getConnection() (*sql.DB, error) {
-	host, port, database := os.Getenv("DATABASE_HOST"), os.Getenv("DATABASE_PORT"), os.Getenv("DATABASE_NAME")
-	user, password, sslmode := os.Getenv("DATABASE_USER"), os.Getenv("DATABASE_PASSWORD"), os.Getenv("DATABASE_SSLMODE")
+	host, port, database := envs["DATABASE_HOST"], envs["DATABASE_PORT"], envs["DATABASE_NAME"]
+	user, password, sslmode := envs["DATABASE_USER"], envs["DATABASE_PASSWORD"], envs["DATABASE_SSLMODE"]
 	uri := "postgres://" + user + ":" + password + "@" + host + ":" + port + "/" + database + "?sslmode=" + sslmode
 
 	return sql.Open("postgres", uri)
 }
 
 func initDB() {
+	envs, err = godotenv.Read(".env")
+
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	db, err := getConnection()
 	if err != nil {
 		log.Panic(err)
@@ -48,8 +59,8 @@ func Close() error {
 }
 
 func MakeMigration(db *sql.DB) error {
-	file := os.Getenv("DATABASE_MIGRATION_FILE")
-	b, err := ioutil.ReadFile("../database/" + file)
+	file := envs["DATABASE_MIGRATION_FILE"]
+	b, err := ioutil.ReadFile("./database/" + file)
 
 	if err != nil {
 		return err

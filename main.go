@@ -7,12 +7,20 @@ import (
 
 	"go-restful/internal/data"
 	"go-restful/internal/server"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
 
+	envs, err := godotenv.Read(".env")
+
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	//Read the port from environment file
-	port := os.Getenv("PORT")
+	port := envs["PORT"]
 
 	//Crate a new server
 	server, err := server.New(port)
