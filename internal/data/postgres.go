@@ -49,7 +49,7 @@ func Close() error {
 
 func MakeMigration(db *sql.DB) error {
 	file := os.Getenv("DATABASE_MIGRATION_FILE")
-	b, err := ioutil.ReadFile("./database/" + file)
+	b, err := ioutil.ReadFile("../../database/" + file)
 
 	if err != nil {
 		return err
