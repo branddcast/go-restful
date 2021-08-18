@@ -26,7 +26,10 @@ func getConnection() (*sql.DB, error) {
 func initDB() {
 	envs, err = godotenv.Read(".env")
 
+	log.Println(envs)
+
 	if err != nil {
+		log.Fatal(err)
 		log.Fatal("Error loading .env file")
 	}
 
