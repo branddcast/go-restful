@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS articles (
     id serial NOT NULL,
     title VARCHAR(150) NOT NULL,
     description VARCHAR(300) NOT NULL,
-    content TEXT NOT NULL UNIQUE,
+    content VARCHAR(500) NOT NULL UNIQUE,
     CONSTRAINT pk_articles PRIMARY KEY(id)
 );
 
