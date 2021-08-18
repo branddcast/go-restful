@@ -29,7 +29,7 @@ func initDB() {
 	log.Println(envs)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
 		log.Fatal("Error loading .env file")
 	}
 
