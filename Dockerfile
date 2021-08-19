@@ -11,7 +11,7 @@ ADD . /app
 
 WORKDIR /app
 
-RUN go mod init go-restful
+#RUN go mod init go-restful
 
 RUN go mod tidy
 
