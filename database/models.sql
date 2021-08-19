@@ -9,12 +9,14 @@ EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, skipping', SQLERRM USING E
 END
 $$;
 
-DO $$
-BEGIN
-CREATE DATABASE go_restful OWNER gouser;
-EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
-END
-$$;
+-- DO $$
+-- BEGIN
+-- CREATE DATABASE go_restful OWNER gouser;
+-- EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
+-- END
+-- $$;
+
+GRANT USAGE ON SCHEMA go_restful TO gouser;
 
 --- CREATE DATABASE IF NOT EXISTS go_restful OWNER gouser;
 
