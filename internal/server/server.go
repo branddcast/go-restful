@@ -40,6 +40,7 @@ func (server *Server) Close() error {
 
 //Start the server
 func (server *Server) Start() {
+	log.Println(server)
 	log.Printf("Server running on localhost%s", server.server.Addr)
 	log.Fatal(server.server.ListenAndServe())
 }
