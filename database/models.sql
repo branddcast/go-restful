@@ -1,5 +1,7 @@
 --- CREATE ROLE gouser WITH LOGIN PASSWORD 'gouser';
 
+DROP TABLE IF EXISTS articles;
+
 DO $$
 BEGIN
 CREATE ROLE gouser;
@@ -7,9 +9,16 @@ EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, skipping', SQLERRM USING E
 END
 $$;
 
-CREATE DATABASE IF NOT EXISTS go_restful OWNER gouser;
+DO $$
+BEGIN
+CREATE DATABASE go_restful OWNER gouser;
+EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
+END
+$$;
 
-CREATE TABLE IF NOT EXISTS articles (
+--- CREATE DATABASE IF NOT EXISTS go_restful OWNER gouser;
+
+CREATE TABLE articles (
     id serial NOT NULL,
     title VARCHAR(150) NOT NULL,
     description VARCHAR(300) NOT NULL,
