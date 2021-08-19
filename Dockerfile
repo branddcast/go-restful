@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/ubi
 #Install golang
 RUN dnf install tar wget go-toolset -y
 
-ENV PATH="/usr/local/go/bin:$PATH"  GOLANG_VERSION=1.9 GOPATH=/go
+ENV PATH="/usr/local/go/bin:$PATH" GOPATH=/go
 
 RUN mkdir /app
 
