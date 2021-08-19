@@ -6,7 +6,7 @@ CREATE TABLE articles (
     id serial NOT NULL,
     title VARCHAR(150) NOT NULL,
     description VARCHAR(300) NOT NULL,
-    content VARCHAR(500) NOT NULL UNIQUE,
+    content VARCHAR(500) NOT NULL,
     CONSTRAINT pk_articles PRIMARY KEY(id)
 );
 
